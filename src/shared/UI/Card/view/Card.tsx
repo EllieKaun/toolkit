@@ -1,5 +1,5 @@
 import { CardProps } from "../type/CardType"
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import { Button, Typography, Box } from "@mui/material"
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,15 @@ const Card:FC<CardProps> = (props) => {
     const notifyDelete = () => toast.error("Удалено из корзины");
 
     const [isInCart, setIsInCart] = useState(inCart)
+
+    useEffect(() => {
+        const currentData = localStorage.getItem('cartData') ? [...JSON.parse(localStorage.getItem('cartData')  || "")] : []
+        currentData.forEach((item) => {
+            if(item.id === cardData.id){
+                setIsInCart(true)
+            }
+        })
+    }, [])
 
     const handleAddToCart = () => {
         const currentData =localStorage.getItem('cartData') ? [...JSON.parse(localStorage.getItem('cartData')  || "")] : []
