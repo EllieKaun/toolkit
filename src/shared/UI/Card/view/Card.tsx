@@ -4,11 +4,13 @@ import { Button, Typography, Box } from "@mui/material"
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 
 const Card:FC<CardProps> = (props) => {
 
     const {cardData, inCart} = props
+
+    const {t} = useTranslation()
 
     const location = useLocation()
 
@@ -61,8 +63,8 @@ const Card:FC<CardProps> = (props) => {
             <Typography>{cardData.title}</Typography>
             <Typography>{cardData.id}</Typography>
             {isInCart ? 
-                <Button onClick={handleDeleteFromCard}>Удалить из корзины</Button> : 
-                <Button variant="contained" onClick={handleAddToCart}>Добавить в корзину</Button>
+                <Button onClick={handleDeleteFromCard}>{t('RemoveFromCart')}</Button> : 
+                <Button variant="contained" onClick={handleAddToCart}>{t('AddToCart')}</Button>
             }
         </Box>
     )

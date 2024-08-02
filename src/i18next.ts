@@ -10,11 +10,14 @@ const resources = {
     ru: {translation: ru}
 }
 
+export const currentLang = localStorage.getItem("lang") || "ru"
+
 i18n
     .use(initReactI18next)
     .init({
         resources, 
-        lng: 'ru', 
+        lng: currentLang, 
         fallbackLng: 'ru', 
         interpolation: {escapeValue: false}
     })
+export default i18n
